@@ -2,11 +2,13 @@
 pragma solidity ^0.8.13;
 
 import {Script, console2} from "forge-std/Script.sol";
+import {Foo} from "../src/CTF1.sol"; 
 
-contract Ctf1Script is Script {
-    function setUp() public {}
+contract CtfDeploy is Script {
 
     function run() public {
-        vm.broadcast();
+        vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
+        Foo foo = new Foo();  
+        vm.stopBroadcast();
     }
 }
