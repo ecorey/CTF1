@@ -10,7 +10,8 @@ contract SolutionTest is Test {
 
     uint256[2][3] public matrix1 = [[1, 2], [3, 4], [5, 6]]; 
     uint256[2][3] public matrix2 = [[6, 5], [4, 3], [2, 1]];
-    uint256 public result;  // Changed to uint256 from uint256[2][3]
+    uint256[2][3] public expected = [[7, 7], [7, 7], [7, 7]];
+    uint256[2][3] public result;  
 
     function setUp() public {
         ctf1 = new Foo();
@@ -18,6 +19,12 @@ contract SolutionTest is Test {
 
     function test_MatrixAddition() public {
         result = ctf1.solution(matrix1, matrix2);
-        assertEq(result, 7, "The sum of values at position [1][1] should be 7");
+        assertEq(result[0][0], expected[0][0], "Matrix addition error at position");
+        assertEq(result[0][1], expected[0][1], "Matrix addition error at position");
+        assertEq(result[1][0], expected[1][0], "Matrix addition error at position");
+        assertEq(result[1][1], expected[1][1], "Matrix addition error at position");
+        assertEq(result[2][0], expected[2][0], "Matrix addition error at position");
+        assertEq(result[2][1], expected[2][1], "Matrix addition error at position");
+
     }
 }

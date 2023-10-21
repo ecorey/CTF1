@@ -3,7 +3,8 @@
 // 2x3 (uint256[2][3]). 
 // Take a look at Wikipedia if you need help 
 // understanding matrix addition. Your solution should implement the 
-// following interface:
+// following interface
+
 
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
@@ -12,7 +13,7 @@ interface Isolution1 {
     function solution(
         uint256[2][3] calldata x, 
         uint256[2][3] calldata y
-    ) external pure returns (uint256, uint256, uint256, uint256, uint256, uint256);
+    ) external pure returns (uint256[2][3] memory);
 }
 
 contract Foo is Isolution1 {
@@ -20,14 +21,17 @@ contract Foo is Isolution1 {
     function solution(
         uint256[2][3] calldata x, 
         uint256[2][3] calldata y
-    ) external pure override returns (uint256, uint256, uint256, uint256, uint256, uint256) {
-        uint256 a = x[0][0] + y[0][0];
-        uint256 b = x[0][1] + y[0][1];
-        uint256 c = x[1][0] + y[1][0];
-        uint256 d = x[1][1] + y[1][1];
-        uint256 e = x[2][0] + y[2][0];
-        uint256 f = x[2][1] + y[2][1];
+    ) external pure override returns (uint256[2][3] memory) {
+        // declared inside function to keep function pure
+        uint256[2][3] memory result;  
         
-        return (a, b, c, d, e, f);
+        result[0][0] = x[0][0] + y[0][0];
+        result[0][1] = x[0][1] + y[0][1];
+        result[1][0] = x[1][0] + y[1][0];
+        result[1][1] = x[1][1] + y[1][1];
+        result[2][0] = x[2][0] + y[2][0];
+        result[2][1] = x[2][1] + y[2][1];
+
+        return result;
     }
 }
